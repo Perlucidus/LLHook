@@ -21,7 +21,7 @@ namespace LLHook.Mouse
         public LowLevelMouseHook()
         {
             m_hhook = IntPtr.Zero;
-            m_hookProc = LLKeyboardProc;
+            m_hookProc = LLMouseProc;
         }
 
         public void Start()
@@ -46,7 +46,7 @@ namespace LLHook.Mouse
                 return SetWindowsHookEx((int)WindowsHook.WH_MOUSE_LL, lpfn, Kernel32.GetModuleHandle(curModule.ModuleName), 0);
         }
 
-        private IntPtr LLKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam)
+        private IntPtr LLMouseProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             MouseActionEventArgs eventArgs = new MouseActionEventArgs { IsCancelled = false };
             if (nCode >= 0)
